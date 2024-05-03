@@ -18,6 +18,7 @@ Gostaria de criar uma conta?
 ===> """
 
 usuarios = []
+contas_bancarias = []
 
 while True:
     opcao_entrada = input(menu_entrada)
@@ -31,7 +32,7 @@ while True:
                 if novo_usuario != None:
                     usuarios.append(novo_usuario)
         else:
-            conta(usuarios[cpf])
+            conta(usuarios[cpf], contas_bancarias)
     elif opcao_entrada == '2':
         novo_usuario = criar_usuario(usuarios)
         if novo_usuario != None:
