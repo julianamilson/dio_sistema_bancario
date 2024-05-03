@@ -1,63 +1,44 @@
-menu = """
-Escolha uma acao
+from dentro_conta import dentro_conta as conta
+from criar_usuario import criar_usuario
+from utils import posicao_cpf
 
-[1] Depositar
-[2] Sacar
-[3] Extrato
+menu_entrada = """
+Escolha uma ação
+[1] Entrar em conta
+[2] Criar conta
 [0] Sair
+===> """
 
-=> """
+menu_erro_usuario = """
+Usuário inexistente!
 
-saldo = 0
-limite = 500
-extrato = ""
-numero_saques = 0
-LIMITE_SAQUES = 3
+Gostaria de criar uma conta?
+[1] Sim
+[2] Não
+===> """
+
+usuarios = []
 
 while True:
-    opcao = input(menu)
-
-    if opcao == "1":
-        valor = float(input("Informe o valor do depósito: "))
-
-        if valor > 0:
-            saldo += valor
-            extrato += f"Depósito: R$ {valor:.2f}\n"
-
+    opcao_entrada = input(menu_entrada)
+    if opcao_entrada == '1':
+        id = int(input("Digite id de usuário: "))
+        cpf = posicao_cpf(usuarios, id)
+        if cpf == -42:
+            opcao = int(input(menu_erro_usuario))
+            if opcao == 1:
+                novo_usuario = criar_usuario(usuarios)
+                if novo_usuario != None:
+                    usuarios.append(novo_usuario)
+                print(usuarios)
         else:
-            print("Operação falhou! O valor informado é inválido.")
-
-    elif opcao == "2":
-
-        if numero_saques < LIMITE_SAQUES:
-            valor = float(input("Informe o valor do saque: "))
-
-            if valor > saldo:
-                print("Operação falhou! Você não tem saldo suficiente.")
-        
-            elif valor > limite: 
-                print("Operação falhou! O valor do saque excede o limite.")
-        
-            elif valor > 0:
-                saldo -= valor
-                extrato += f"Saque: R$ {valor:.2f}\n"
-                numero_saques += 1
-        
-            else:
-                print("Operação falhou! O valor informado é inválido.")
-        
-        else:
-            print("Operação falhou! Número máximo de saques excedido.")
-
-
-    elif opcao == "3":
-        print("EXTRATO".center(50, '=')
-              +("Não foram realizadas movimentações." if not extrato else extrato)
-              +f"Saldo: R$ {saldo:.2f}" + "EXTRATO".center(50, '=')
-              )
-
-    elif opcao == "0":
+            conta(usuarios[cpf])
+    elif opcao_entrada == '2':
+        novo_usuario = criar_usuario(usuarios)
+        if novo_usuario != None:
+            usuarios.append(novo_usuario)
+        print(usuarios)
+    elif opcao_entrada == '0':
         break
-
     else:
         print("Operação inválida, por favor selecione novamente a operação desejada.")
