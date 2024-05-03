@@ -30,14 +30,12 @@ while True:
                 novo_usuario = criar_usuario(usuarios)
                 if novo_usuario != None:
                     usuarios.append(novo_usuario)
-                print(usuarios)
         else:
             conta(usuarios[cpf])
     elif opcao_entrada == '2':
         novo_usuario = criar_usuario(usuarios)
         if novo_usuario != None:
             usuarios.append(novo_usuario)
-        print(usuarios)
     elif opcao_entrada == '0':
         break
     else:
