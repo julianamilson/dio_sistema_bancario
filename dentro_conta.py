@@ -12,6 +12,7 @@ Escolha uma ação
 [4] Criar conta corrente
 [0] Sair
 => """
+
 saldo = 0
 limite = 500
 extrato = ""
@@ -21,7 +22,7 @@ LIMITE_SAQUES = 3
 def pegar_valor(funcao=""):
     return float(input(f"Informe o valor do {funcao}: "))
 
-def dentro_conta(usuario):
+def dentro_conta(usuario, contas_bancarias):
     while True:
         opcao = input(_menu_conta)
         if opcao == "1":
@@ -36,8 +37,11 @@ def dentro_conta(usuario):
             f_extrato(saldo, extrato=extrato)
 
         elif opcao == '4':
-            usuario[1]["contas_correntes"].append("bingus")
-            print(usuario[1]["contas_correntes"])
+            numero_conta = len(contas_bancarias) + 1
+            nova_conta = criar_conta_corrente(numero_conta)
+            aux = [usuario[0], nova_conta]
+            contas_bancarias.append(aux)
+            usuario[1]["contas_correntes"].append(numero_conta)
 
         elif opcao == "0":
             break
