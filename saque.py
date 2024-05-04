@@ -13,3 +13,5 @@ def saque(saldo, valor, extrato, limite, numero_saques, limite_saques): #keyword
             print("Operação falhou! O valor informado é inválido.")
     else:
         print("Operação falhou! Número máximo de saques excedido.")
+
+    return saldo, extrato, numero_saques
